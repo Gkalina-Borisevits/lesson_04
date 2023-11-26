@@ -4,20 +4,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int number = 0;
+        int number;
         try {
             System.out.print("Введите целочисленный делитель: ");
             number = Integer.parseInt(scanner.nextLine());
             System.out.print("Вы ввели: " + number);
             System.out.println();
 
-            try {
-                testingExceptions(number);
+            testingExceptions(number);
             } catch (NegativeNumberException | DivisionByZero | NegativeArraySizeException | ArrayIndexException e) {
                 System.out.println("Ошибка! - " + e.getMessage());
-            }
+
         } catch (NumberFormatException e) {
-            System.out.println("Некорректное ввод числа: " + e.getMessage());
+            System.out.println("Некорректный ввод числа: " + e.getMessage());
         }
     }
     // Запросить значение n у пользователя.
@@ -28,9 +27,7 @@ public class Main {
 
 
     public static void testingExceptions(int n) throws NegativeNumberException, DivisionByZero, NegativeArraySizeException, ArrayIndexException {
-        if (n < 0) {
-            throw new NegativeNumberException("Число не может быть отрицательным");
-        } else if (n == 0) {
+         if (n == 0) {
             throw new DivisionByZero("На ноль нельзя делить");
         }
         int x = 10 / n;
@@ -39,6 +36,9 @@ public class Main {
 
         if (n < 0) {
             throw new NegativeArraySizeException("Отрицательный размер массива");
+        }
+        if (n < 0) {
+            throw new NegativeNumberException("Длина массива не может быть отрицательной");
         }
         int[] array = new int[n];
         System.out.println(array.length);
