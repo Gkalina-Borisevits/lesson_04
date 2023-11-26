@@ -9,7 +9,7 @@ public class ExceptionCauseTest {
         try {
             System.out.println(getValueByIndex(2));
         } catch (IllegalArgumentException e) {
-            System.out.println("Сщщбщение об ошибке -" + e.getMessage());
+            System.out.println("Сообщение об ошибке -" + e.getMessage());
             System.out.println("Причина ошибки -" + e.getCause().getMessage());
         }
     }

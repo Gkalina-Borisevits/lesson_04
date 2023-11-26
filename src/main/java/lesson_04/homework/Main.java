@@ -1,45 +1,51 @@
 package lesson_04.homework;
-
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = 0;
-
-        testingExceptions(n, scanner);
-    }
-        // Запросить значение n у пользователя.
-        // Вызвать метод и передать туда значение, полученное от пользователя.
-        // Посмотреть, какие ошибки возможны в данном коде и для каждой
-        // ошибки создать пользовательское исключение.
-        // Выбросить эти исключения в нужное время и обработать их в main.
-
-
-    public static void testingExceptions(int n, Scanner scanner) {
-        System.out.print("Введите целочисленный делитель: ");
+        int number = 0;
         try {
-            n = Integer.parseInt(scanner.nextLine());
-            System.out.print("Вы ввели: " + n);
+            System.out.print("Введите целочисленный делитель: ");
+            number = Integer.parseInt(scanner.nextLine());
+            System.out.print("Вы ввели: " + number);
             System.out.println();
 
-            int x = 10 / n;
-            System.out.println(x);
-
-            int[] array = new int[n];
-            System.out.println(array.length);
-            System.out.println(array[n]);
-
-        } catch (ArithmeticException e) {
-            System.err.println("Деление на ноль: " + e.getMessage());
-        } catch (NegativeArraySizeException e) {
-            System.err.println("Отрицательный размер массива: " + e.getMessage());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Выход за пределы массива: " + e.getMessage());
+            try {
+                testingExceptions(number);
+            } catch (NegativeNumberException | DivisionByZero | NegativeArraySizeException | ArrayIndexException e) {
+                System.out.println("Ошибка! - " + e.getMessage());
+            }
         } catch (NumberFormatException e) {
-            System.err.println("Некорректное ввод числа: " + e.getMessage());
+            System.out.println("Некорректное ввод числа: " + e.getMessage());
         }
     }
-}
+    // Запросить значение n у пользователя.
+    // Вызвать метод и передать туда значение, полученное от пользователя.
+    // Посмотреть, какие ошибки возможны в данном коде и для каждой
+    // ошибки создать пользовательское исключение.
+    // Выбросить эти исключения в нужное время и обработать их в main.
 
+
+    public static void testingExceptions(int n) throws NegativeNumberException, DivisionByZero, NegativeArraySizeException, ArrayIndexException {
+        if (n < 0) {
+            throw new NegativeNumberException("Число не может быть отрицательным");
+        } else if (n == 0) {
+            throw new DivisionByZero("На ноль нельзя делить");
+        }
+        int x = 10 / n;
+        System.out.println(x);
+
+
+        if (n < 0) {
+            throw new NegativeArraySizeException("Отрицательный размер массива");
+        }
+        int[] array = new int[n];
+        System.out.println(array.length);
+
+        if (n >= array.length) {
+            throw new ArrayIndexException("Выход за пределы массива");
+        }
+        System.out.println(array[n]);
+    }
+}
