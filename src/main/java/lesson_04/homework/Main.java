@@ -12,7 +12,7 @@ public class Main {
             System.out.println();
 
             testingExceptions(number);
-            } catch (NegativeNumberException | DivisionByZero | NegativeArraySizeException | ArrayIndexException e) {
+            } catch (DivisionByZero | NegativeArraySizeException | ArrayIndexException e) {
                 System.out.println("Ошибка! - " + e.getMessage());
 
         } catch (NumberFormatException e) {
@@ -26,7 +26,7 @@ public class Main {
     // Выбросить эти исключения в нужное время и обработать их в main.
 
 
-    public static void testingExceptions(int n) throws NegativeNumberException, DivisionByZero, NegativeArraySizeException, ArrayIndexException {
+    public static void testingExceptions(int n) throws DivisionByZero, NegativeArraySizeException, ArrayIndexException {
          if (n == 0) {
             throw new DivisionByZero("На ноль нельзя делить");
         }
@@ -37,9 +37,7 @@ public class Main {
         if (n < 0) {
             throw new NegativeArraySizeException("Отрицательный размер массива");
         }
-        if (n < 0) {
-            throw new NegativeNumberException("Длина массива не может быть отрицательной");
-        }
+
         int[] array = new int[n];
         System.out.println(array.length);
 
